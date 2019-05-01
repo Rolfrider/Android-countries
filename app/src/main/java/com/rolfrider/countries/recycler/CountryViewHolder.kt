@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.rolfrider.countries.CountryItem
+import com.rolfrider.countries.R
 import kotlinx.android.synthetic.main.country_recycle_view_item.view.*
 
 class CountryViewHolder(viewItem: View): RecyclerView.ViewHolder(viewItem){
@@ -15,8 +16,11 @@ class CountryViewHolder(viewItem: View): RecyclerView.ViewHolder(viewItem){
     fun bindItem(countryItem: CountryItem, onItemClick: (CountryItem) -> Unit){
         nameView.text = countryItem.name
         val activity = itemView.context as Activity
-        GlideToVectorYou.
-            justLoadImage(activity, Uri.parse(countryItem.flagUrl), imageView)
+        GlideToVectorYou
+            .init()
+            .with(activity)
+            .setPlaceHolder(R.drawable.ic_loading_24dp, R.drawable.ic_flag_failed)
+            .load(Uri.parse(countryItem.flagUrl), imageView)
         itemView.setOnClickListener { onItemClick(countryItem) }
     }
 }
