@@ -3,8 +3,11 @@ package com.rolfrider.countries
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.rolfrider.countries.api.CountryFetcher
 
 class CountriesViewModel: ViewModel() {
+
+    private val countryFetcher = CountryFetcher()
 
     private val countryLiveData = MutableLiveData<List<CountryItem>>()
 
@@ -12,11 +15,13 @@ class CountriesViewModel: ViewModel() {
 
     fun getCountries(name: String?){
         if (name.isNullOrBlank()){
-            //TODO: fetch all countries
-            countryLiveData.value = (0..12).map { CountryItem("col", "Columbia") }
+            countryFetcher.fetchAll(
+                {countryLiveData.value = it.map(::CountryItem)},
+                { println(it)}
+            )
         }else{
             //TODO: fetch countries with given name
-            countryLiveData.value = listOf(CountryItem("pol", "Poland"))
+            countryLiveData.value = listOf(CountryItem("pol", "Poland", "https://restcountries.eu/data/pol.svg"))
         }
     }
 }

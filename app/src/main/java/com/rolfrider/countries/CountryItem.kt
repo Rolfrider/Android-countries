@@ -1,7 +1,14 @@
 package com.rolfrider.countries
 
-data class CountryItem(val code: String, val name: String) {
+import com.rolfrider.countries.api.Country
 
-    val flagUrl = "https://restcountries.eu/data/$code.svg"
+data class CountryItem(val code: String, val name: String, val flagUrl: String) {
+
+    constructor(country: Country): this(
+        country.alpha3Code,
+        country.name,
+        country.flag
+    )
+
     val countryUrl = "https://restcountries.eu/rest/v2/alpha/$code"
 }
