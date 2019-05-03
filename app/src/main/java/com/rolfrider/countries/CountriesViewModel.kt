@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.rolfrider.countries.api.CountryFetcher
 import com.rolfrider.countries.api.CountryFetcherImpl
 
-class CountriesViewModel(private val countryFetcher: CountryFetcher = CountryFetcherImpl()): ViewModel() {
+class CountriesViewModel(
+    private val countryFetcher: CountryFetcher = CountryFetcherImpl(),
+    private var allCountries: List<CountryItem> = emptyList()
+): ViewModel() {
 
 
 
     private val countryLiveData = MutableLiveData<List<CountryItem>>()
-    private var allCountries: List<CountryItem> = emptyList()
 
 
     fun countries(): LiveData<List<CountryItem>> = countryLiveData
