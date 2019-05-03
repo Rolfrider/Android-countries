@@ -10,18 +10,26 @@ class CountriesViewModel: ViewModel() {
     private val countryFetcher = CountryFetcher()
 
     private val countryLiveData = MutableLiveData<List<CountryItem>>()
+    private var allCountries: List<CountryItem> = emptyList()
+
 
     fun countries(): LiveData<List<CountryItem>> = countryLiveData
 
-    fun getCountries(name: String?){
-        if (name.isNullOrBlank()){
-            countryFetcher.fetchAll(
-                {countryLiveData.value = it.map(::CountryItem)},
-                { println(it)}
-            )
-        }else{
-            //TODO: fetch countries with given name
-            countryLiveData.value = listOf(CountryItem("pol", "Poland", "https://restcountries.eu/data/pol.svg"))
+    fun getCountries(){
+        countryFetcher.fetchAll(
+            {
+                allCountries = it.map(::CountryItem)
+                countryLiveData.value = allCountries
+            },
+            { println(it)}
+        )
+    }
+
+    fun searchCountry(query: String?){
+        if (query.isNullOrBlank()){
+            countryLiveData.value = allCountries
+        } else {
+            countryLiveData.value = allCountries.filter { it.name.contains(query, true)}
         }
     }
 }
