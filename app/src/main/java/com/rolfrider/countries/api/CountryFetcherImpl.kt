@@ -17,6 +17,24 @@ class CountryFetcherImpl: CountryFetcher {
 
     private val countryApi = retrofit.create(CountryApi::class.java)
 
+    override fun fetchCountry(countryCode: String, onSuccess: (CountryDetail) -> Unit, onError: (String) -> Unit) {
+        val call = countryApi.getCountryDetail(countryCode)
+        call.enqueue(object : Callback<CountryDetail> {
+            override fun onFailure(call: Call<CountryDetail>, t: Throwable) {
+                onError(t.message ?: "Unknown error")
+            }
+
+            override fun onResponse(call: Call<CountryDetail>, response: Response<CountryDetail>) {
+                if (response.isSuccessful){
+                    val country = response.body() ?: return onError("Expected response body")
+                    onSuccess(country)
+                }else{
+                    onError(response.message())
+                }
+            }
+        })
+    }
+
     override fun fetchAll(onSuccess: (List<Country>) -> Unit, onError: (String) -> Unit){
         val call = countryApi.getAllCountries()
         call.enqueue(object : Callback<List<Country>> {

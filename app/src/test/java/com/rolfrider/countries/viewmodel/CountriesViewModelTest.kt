@@ -1,7 +1,8 @@
-package com.rolfrider.countries
+package com.rolfrider.countries.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
+import com.rolfrider.countries.CountryItem
 import com.rolfrider.countries.api.Country
 import com.rolfrider.countries.api.CountryFetcher
 import org.junit.Assert
@@ -16,8 +17,10 @@ class CountriesViewModelTest{
         Country("Poland", "POL", "polFlagImageLink"),
         Country("Germany", "GER", "gerFlagImageLink")
     )
-    private val countryItems = listOf(CountryItem("POL", "Poland", "polFlagImageLink"),
-        CountryItem("GER", "Germany", "gerFlagImageLink"))
+    private val countryItems = listOf(
+        CountryItem("POL", "Poland", "polFlagImageLink"),
+        CountryItem("GER", "Germany", "gerFlagImageLink")
+    )
 
     @get:Rule// to solve live data assertions, this runs tasks in test thread
     var rule: TestRule = InstantTaskExecutorRule()
@@ -35,7 +38,8 @@ class CountriesViewModelTest{
         val sut = CountriesViewModel(allCountries = countryItems)
         val query = "Poland"
         sut.searchCountry(query)
-        Assert.assertEquals(CountryItem("POL", "Poland", "polFlagImageLink"),
+        Assert.assertEquals(
+            CountryItem("POL", "Poland", "polFlagImageLink"),
             sut.countries().value?.singleOrNull())
     }
 
@@ -47,8 +51,10 @@ class CountriesViewModelTest{
         val sut = CountriesViewModel(allCountries = biggerListOfCountries)
         val query = "Pol"
         sut.searchCountry(query)
-        Assert.assertEquals(listOf(CountryItem("POL", "Poland", "polFlagImageLink"),
-            CountryItem("PLD", "Polandia", "pldFlagImageLink")),
+        Assert.assertEquals(listOf(
+            CountryItem("POL", "Poland", "polFlagImageLink"),
+            CountryItem("PLD", "Polandia", "pldFlagImageLink")
+        ),
             sut.countries().value)
     }
 

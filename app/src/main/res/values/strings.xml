@@ -2,4 +2,11 @@
     <string name="app_name">Countries of the world</string>
     <string name="action_search">Search</string>
     <string name="search_hint">Type country name</string>
+    <string name="transition_name">image_transition</string>
+    <string name="label_capital">Capital</string>
+    <string name="label_region">Region</string>
+    <string name="label_population">Population</string>
+    <string name="label_area">Area(km^2)</string>
+    <string name="label_languages">Languages</string>
+    <string name="label_currencies">Currencies</string>
 </resources>

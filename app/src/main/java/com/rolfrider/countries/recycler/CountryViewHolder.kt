@@ -13,7 +13,7 @@ class CountryViewHolder(viewItem: View): RecyclerView.ViewHolder(viewItem){
     private val imageView = viewItem.flagImageView
     private val nameView = viewItem.countryNameView
 
-    fun bindItem(countryItem: CountryItem, onItemClick: (CountryItem) -> Unit){
+    fun bindItem(countryItem: CountryItem, onItemClick: (CountryItem, View) -> Unit){
         nameView.text = countryItem.name
         val activity = itemView.context as Activity
         GlideToVectorYou
@@ -21,6 +21,6 @@ class CountryViewHolder(viewItem: View): RecyclerView.ViewHolder(viewItem){
             .with(activity)
             .setPlaceHolder(R.drawable.ic_loading_24dp, R.drawable.ic_flag_failed)
             .load(Uri.parse(countryItem.flagUrl), imageView)
-        itemView.setOnClickListener { onItemClick(countryItem) }
+        itemView.setOnClickListener { onItemClick(countryItem, imageView) }
     }
 }
