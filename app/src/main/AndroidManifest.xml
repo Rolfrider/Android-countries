@@ -34,7 +34,7 @@
                 </intent-filter>
 
             </activity>
-            <activity android:name=".activity.CountryDetailActivity">
+            <activity android:name=".activity.CountryDetailActivity" android:parentActivityName=".activity.MainActivity">
 
             </activity>
 
