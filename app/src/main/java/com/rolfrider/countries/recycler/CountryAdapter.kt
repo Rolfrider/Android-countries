@@ -1,6 +1,7 @@
 package com.rolfrider.countries.recycler
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,7 @@ import com.rolfrider.countries.R
 
 class CountryAdapter(
     items: List<CountryItem>,
-    private val onItemClick: (CountryItem) -> Unit
+    private val onItemClick: (CountryItem, View) -> Unit
 ): RecyclerView.Adapter<CountryViewHolder>(){
 
     private val asyncListDiffer: AsyncListDiffer<CountryItem> = AsyncListDiffer(this, DIFF_CALLBACK)

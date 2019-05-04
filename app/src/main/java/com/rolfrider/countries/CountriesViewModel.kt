@@ -11,8 +11,6 @@ class CountriesViewModel(
     private var allCountries: List<CountryItem> = emptyList()
 ): ViewModel() {
 
-
-
     private val countryLiveData = MutableLiveData<List<CountryItem>>()
 
 

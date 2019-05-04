@@ -19,7 +19,7 @@
                     android:name="com.google.android.geo.API_KEY"
                     android:value="@string/google_maps_key" />
 
-            <activity android:name=".MainActivity">
+            <activity android:name=".activity.MainActivity">
                 <meta-data
                         android:name="android.app.searchable"
                         android:resource="@xml/searchable" />
@@ -34,7 +34,7 @@
                 </intent-filter>
 
             </activity>
-            <activity android:name=".CountryDetailActivity">
+            <activity android:name=".activity.CountryDetailActivity">
 
             </activity>
 
