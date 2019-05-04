@@ -11,15 +11,19 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.rolfrider.countries.CountriesViewModel
+import com.rolfrider.countries.viewmodel.CountriesViewModel
 import com.rolfrider.countries.CountryItem
 import com.rolfrider.countries.R
 import com.rolfrider.countries.recycler.CountryAdapter
+import com.rolfrider.countries.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: CountriesViewModel by lazy { ViewModelProviders.of(this).get(CountriesViewModel::class.java) }
+    private val viewModel: CountriesViewModel by lazy {
+        ViewModelProviders.of(this,
+            ViewModelFactory())[CountriesViewModel::class.java]
+    }
 
     private val adapter: CountryAdapter by lazy { CountryAdapter(emptyList(), this::handleItemClick) }
 
