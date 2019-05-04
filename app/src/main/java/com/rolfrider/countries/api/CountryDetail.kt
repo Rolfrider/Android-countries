@@ -14,6 +14,6 @@ data class CountryDetail(val name: String,
                          val languages: ArrayList<Language>,
                          val flag: String)
 
-data class Currency(val name: String, val symbol: String?)
+data class Currency(val name: String, val code: String)
 
 data class Language(val name: String)

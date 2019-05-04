@@ -2,6 +2,9 @@ package com.rolfrider.countries.activity
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,6 +21,8 @@ import com.rolfrider.countries.viewmodel.DetailCountryViewModel
 import com.rolfrider.countries.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_country_detail.*
 import kotlinx.android.synthetic.main.country_recycle_view_item.flagImageView
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
 
@@ -33,6 +38,7 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_detail)
         supportPostponeEnterTransition()
+        title = "Country Info"
 
         val countryItem = intent.getParcelableExtra<CountryItem>(EXTRA_KEY)
 
@@ -45,7 +51,29 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
         loadFlagImage(countryItem.flagUrl)
     }
 
-    private fun updateCountry(country: CountryDetailItem){
+    private fun updateCountry(country: CountryDetailItem?){
+        if (country == null) return
+        countryNameView.text = country.name
+        countryCodeView.text = country.code
+        capitalView.text = country.capital
+        populationView.text = DECIMAL_FORMAT.format(country.population)
+        languageView.text = country.languages.joinToString(", ")
+        regionView.text = country.subregion
+        currenciesView.text = country.currencies
+            .joinToString(", ") { "${it.name}(${it.code})" }
+        areaView.text = DECIMAL_FORMAT.format(country.area)
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            android.R.id.home -> {
+                finishAfterTransition()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun loadFlagImage(flagUrl: String){
@@ -79,6 +107,11 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
 
     companion object{
         const val EXTRA_KEY = "country_item"
+        val DECIMAL_FORMAT =  DecimalFormat().apply {
+            decimalFormatSymbols = DecimalFormatSymbols().apply { groupingSeparator = ' ' }
+            groupingSize = 3
+            isGroupingUsed = true
+        }
     }
 
 }
