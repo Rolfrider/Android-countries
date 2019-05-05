@@ -11,6 +11,8 @@
             android:layout_height="60dp"
             app:srcCompat="@drawable/ic_flag_failed"
             android:id="@+id/flagImageView"
+            android:scaleType="centerCrop"
+            android:background="@drawable/round_outline"
             android:transitionName="@string/transition_name"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"

@@ -77,6 +77,7 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
     }
 
     private fun loadFlagImage(flagUrl: String){
+        flagImageView.clipToOutline = true
         GlideToVectorYou.init()
             .with(this)
             .withListener(object : GlideToVectorYouListener{
