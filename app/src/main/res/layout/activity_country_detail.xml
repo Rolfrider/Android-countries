@@ -13,7 +13,7 @@
             android:id="@+id/flagImageView"
             android:transitionName="@string/transition_name"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/map"
             android:layout_marginTop="16dp"/>
@@ -55,14 +55,15 @@
             app:layout_constraintTop_toBottomOf="@+id/map"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="32dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:id="@+id/linearLayout"
-            app:layout_constraintHorizontal_bias="0.5">
+            app:layout_constraintHorizontal_bias="0.5"
+            android:baselineAligned="false">
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_weight="0.5"
@@ -101,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             <TextView
-                    android:text="12324324"
+                    android:text="123 243 24"
                     android:layout_marginTop="4dp"
                     style="@style/valueTextAppearance"
                     android:layout_width="match_parent"
@@ -146,7 +147,7 @@
                     style="@style/labelTextAppearance"
                     android:layout_height="wrap_content"/>
             <TextView
-                    android:text="12324324"
+                    android:text="123 243 24"
                     android:layout_marginTop="4dp"
                     style="@style/valueTextAppearance"
                     android:layout_width="match_parent"
