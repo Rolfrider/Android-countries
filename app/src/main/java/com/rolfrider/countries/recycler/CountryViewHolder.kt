@@ -21,6 +21,7 @@ class CountryViewHolder(viewItem: View): RecyclerView.ViewHolder(viewItem){
             .with(activity)
             .setPlaceHolder(R.drawable.ic_loading_24dp, R.drawable.ic_flag_failed)
             .load(Uri.parse(countryItem.flagUrl), imageView)
+        imageView.clipToOutline = true
         itemView.setOnClickListener { onItemClick(countryItem, imageView) }
     }
 }

@@ -2,9 +2,10 @@ package com.rolfrider.countries.activity
 
 import android.net.Uri
 import android.os.Bundle
-import android.view.ContextMenu
+import android.text.method.ScrollingMovementMethod
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +20,8 @@ import com.rolfrider.countries.CountryItem
 import com.rolfrider.countries.R
 import com.rolfrider.countries.viewmodel.DetailCountryViewModel
 import com.rolfrider.countries.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.activity_country_detail.*
+import kotlinx.android.synthetic.main.country_header.*
+import kotlinx.android.synthetic.main.country_info.*
 import kotlinx.android.synthetic.main.country_recycle_view_item.flagImageView
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -38,7 +40,6 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_detail)
         supportPostponeEnterTransition()
-        title = "Country Info"
 
         val countryItem = intent.getParcelableExtra<CountryItem>(EXTRA_KEY)
 
@@ -49,7 +50,11 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
         viewModel.fetchCountry(countryItem.code)
 
         loadFlagImage(countryItem.flagUrl)
+
+        countryNameView.isSelected = true
     }
+
+
 
     private fun updateCountry(country: CountryDetailItem?){
         if (country == null) return
@@ -66,6 +71,10 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
 
     }
 
+    fun handleCloseButton(view: View){
+        finishAfterTransition()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId){
             android.R.id.home -> {
@@ -77,6 +86,7 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
     }
 
     private fun loadFlagImage(flagUrl: String){
+        flagImageView.clipToOutline = true
         GlideToVectorYou.init()
             .with(this)
             .withListener(object : GlideToVectorYouListener{

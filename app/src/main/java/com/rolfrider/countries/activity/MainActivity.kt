@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(toolbar)
 
         countryRecyclerView.adapter = adapter
         viewModel.countries().observe(this, Observer(this::updateCountryList))
