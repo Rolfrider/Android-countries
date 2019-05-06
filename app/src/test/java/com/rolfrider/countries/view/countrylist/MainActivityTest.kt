@@ -1,8 +1,8 @@
-package com.rolfrider.countries.activity
+package com.rolfrider.countries.view.countrylist
 
 import androidx.recyclerview.widget.RecyclerView
 import com.rolfrider.countries.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.rolfrider.countries.view.countrydetail.CountryDetailActivity
 import kotlinx.android.synthetic.main.country_recycle_view_item.*
 import org.junit.Assert
 import org.junit.Test
@@ -23,7 +23,7 @@ class MainActivityTest {
         recyclerView.measure(0,0)
         recyclerView.layout(0,0,100,1000)
 
-        activity.country_item.performClick()
+        activity.countryItem.performClick()
 
         Assert.assertEquals(
             CountryDetailActivity::class.java.name,

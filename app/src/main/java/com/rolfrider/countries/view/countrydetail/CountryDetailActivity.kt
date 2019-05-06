@@ -1,11 +1,9 @@
-package com.rolfrider.countries.activity
+package com.rolfrider.countries.view.countrydetail
 
 import android.net.Uri
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,8 +13,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.rolfrider.countries.CountryDetailItem
-import com.rolfrider.countries.CountryItem
+import com.rolfrider.countries.view.countrylist.CountryItem
 import com.rolfrider.countries.R
 import com.rolfrider.countries.viewmodel.DetailCountryViewModel
 import com.rolfrider.countries.viewmodel.ViewModelFactory
@@ -107,7 +104,7 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        viewModel.latLang().observe(this, Observer {
+        viewModel.latLng().observe(this, Observer {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 5f))
 
         })

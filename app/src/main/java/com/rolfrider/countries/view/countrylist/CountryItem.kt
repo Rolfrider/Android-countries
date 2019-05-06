@@ -1,4 +1,4 @@
-package com.rolfrider.countries
+package com.rolfrider.countries.view.countrylist
 
 import android.os.Parcel
 import android.os.Parcelable
