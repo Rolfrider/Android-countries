@@ -125,6 +125,8 @@ class DetailCountryViewModelTest{
 
         successfulResponse(noLatLngCountry)
 
+        sut.fetchCountry("POL")
+
         Assert.assertEquals(LatLng(0.0, 0.0), sut.latLng().value)
     }
 }
