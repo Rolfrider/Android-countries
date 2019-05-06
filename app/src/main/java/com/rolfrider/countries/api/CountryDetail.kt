@@ -11,8 +11,7 @@ data class CountryDetail(val name: String,
                          val latlng: ArrayList<Double>,
                          val area: Double,
                          val currencies: ArrayList<Currency>,
-                         val languages: ArrayList<Language>,
-                         val flag: String)
+                         val languages: ArrayList<Language>)
 
 data class Currency(val name: String, val code: String)
 

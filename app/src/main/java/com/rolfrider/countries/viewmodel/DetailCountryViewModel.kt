@@ -12,7 +12,7 @@ class DetailCountryViewModel(private val countryFetcher: CountryFetcher): ViewMo
     private val latLngLiveData = MutableLiveData<LatLng>()
 
     fun country() = countryLiveData
-    fun latLang() = latLngLiveData
+    fun latLng() = latLngLiveData
 
     fun fetchCountry(countryCode: String){
         countryFetcher.fetchCountry(countryCode,

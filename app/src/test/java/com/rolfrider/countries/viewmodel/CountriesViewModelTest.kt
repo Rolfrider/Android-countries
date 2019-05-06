@@ -26,7 +26,7 @@ class CountriesViewModelTest{
     var rule: TestRule = InstantTaskExecutorRule()
 
     @Test
-    fun `view model returns full list of countries if query is blank`(){
+    fun `view model returns full list of countries if search query is blank`(){
         val sut = CountriesViewModel(allCountries = countryItems)
         val query = " "
         sut.searchCountry(query)

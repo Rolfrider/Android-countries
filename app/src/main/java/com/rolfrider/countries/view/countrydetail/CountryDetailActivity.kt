@@ -104,7 +104,7 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        viewModel.latLang().observe(this, Observer {
+        viewModel.latLng().observe(this, Observer {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 5f))
 
         })
