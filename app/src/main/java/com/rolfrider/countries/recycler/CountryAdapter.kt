@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.rolfrider.countries.CountryItem
+import com.rolfrider.countries.view.countrylist.CountryItem
 import com.rolfrider.countries.R
 
 class CountryAdapter(

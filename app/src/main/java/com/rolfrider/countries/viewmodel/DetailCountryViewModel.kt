@@ -3,7 +3,7 @@ package com.rolfrider.countries.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
-import com.rolfrider.countries.CountryDetailItem
+import com.rolfrider.countries.view.countrydetail.CountryDetailItem
 import com.rolfrider.countries.api.CountryFetcher
 
 class DetailCountryViewModel(private val countryFetcher: CountryFetcher): ViewModel() {

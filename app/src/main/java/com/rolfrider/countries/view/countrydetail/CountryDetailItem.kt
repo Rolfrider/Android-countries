@@ -1,4 +1,4 @@
-package com.rolfrider.countries
+package com.rolfrider.countries.view.countrydetail
 
 import com.rolfrider.countries.api.CountryDetail
 import com.rolfrider.countries.api.Currency

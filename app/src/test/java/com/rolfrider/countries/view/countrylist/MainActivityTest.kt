@@ -1,8 +1,8 @@
-package com.rolfrider.countries.activity
+package com.rolfrider.countries.view.countrylist
 
 import androidx.recyclerview.widget.RecyclerView
 import com.rolfrider.countries.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.rolfrider.countries.view.countrydetail.CountryDetailActivity
 import kotlinx.android.synthetic.main.country_recycle_view_item.*
 import org.junit.Assert
 import org.junit.Test

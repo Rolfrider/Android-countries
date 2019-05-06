@@ -1,4 +1,4 @@
-package com.rolfrider.countries.activity
+package com.rolfrider.countries.view.countrylist
 
 import android.app.SearchManager
 import android.content.Context
@@ -12,8 +12,8 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.rolfrider.countries.viewmodel.CountriesViewModel
-import com.rolfrider.countries.CountryItem
 import com.rolfrider.countries.R
+import com.rolfrider.countries.view.countrydetail.CountryDetailActivity
 import com.rolfrider.countries.recycler.CountryAdapter
 import com.rolfrider.countries.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*

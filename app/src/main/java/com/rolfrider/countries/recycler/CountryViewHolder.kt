@@ -5,7 +5,7 @@ import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
-import com.rolfrider.countries.CountryItem
+import com.rolfrider.countries.view.countrylist.CountryItem
 import com.rolfrider.countries.R
 import kotlinx.android.synthetic.main.country_recycle_view_item.view.*
 

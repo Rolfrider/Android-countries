@@ -2,7 +2,7 @@ package com.rolfrider.countries.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.*
-import com.rolfrider.countries.CountryItem
+import com.rolfrider.countries.view.countrylist.CountryItem
 import com.rolfrider.countries.api.Country
 import com.rolfrider.countries.api.CountryFetcher
 import org.junit.Assert
