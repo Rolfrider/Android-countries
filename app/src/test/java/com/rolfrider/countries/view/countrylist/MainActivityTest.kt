@@ -23,7 +23,7 @@ class MainActivityTest {
         recyclerView.measure(0,0)
         recyclerView.layout(0,0,100,1000)
 
-        activity.country_item.performClick()
+        activity.countryItem.performClick()
 
         Assert.assertEquals(
             CountryDetailActivity::class.java.name,
