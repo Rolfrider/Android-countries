@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -44,6 +45,7 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
         mapFragment?.getMapAsync(this)
 
         viewModel.country().observe(this, Observer(this::updateCountry))
+        viewModel.error().observe(this, Observer(this::showErrorMessage))
         viewModel.fetchCountry(countryItem.code)
 
         loadFlagImage(countryItem.flagUrl)
@@ -51,7 +53,10 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
         countryNameView.isSelected = true
     }
 
-
+    private fun showErrorMessage(message: String){
+        val toastMessage = getString(R.string.error_message) + " : " + message
+        Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
+    }
 
     private fun updateCountry(country: CountryDetailItem?){
         if (country == null) return
@@ -70,16 +75,6 @@ class CountryDetailActivity: AppCompatActivity(), OnMapReadyCallback{
 
     fun handleCloseButton(view: View){
         finishAfterTransition()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId){
-            android.R.id.home -> {
-                finishAfterTransition()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun loadFlagImage(flagUrl: String){

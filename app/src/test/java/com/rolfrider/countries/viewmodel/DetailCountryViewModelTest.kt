@@ -48,6 +48,8 @@ class DetailCountryViewModelTest{
 
     private val latLng = LatLng(52.0, 20.0)
 
+    private val someConnectionError = "Connection Error"
+
     private fun successfulResponse(country: CountryDetail){
         whenever(countryFetcher.fetchCountry(any(), any(), any())).thenAnswer {
             val onSuccess = it.getArgument<((CountryDetail) -> Unit)>(1)
@@ -84,6 +86,27 @@ class DetailCountryViewModelTest{
         Assert.assertNull(sut.country().value)
     }
 
+    @Test
+    fun `view model updates error live data with message on error response`(){
+        val sut = DetailCountryViewModel(countryFetcher)
+
+        errorResponse(someConnectionError)
+
+        sut.fetchCountry("POL")
+
+        Assert.assertEquals(someConnectionError, sut.error().value)
+    }
+
+    @Test
+    fun `view model not updates error live data with message on successful response`(){
+        val sut = DetailCountryViewModel(countryFetcher)
+
+        successfulResponse(countryDetail)
+
+        sut.fetchCountry("POL")
+
+        Assert.assertNull(sut.error().value)
+    }
 
     @Test
     fun `view model updates latLng value on successful response`(){

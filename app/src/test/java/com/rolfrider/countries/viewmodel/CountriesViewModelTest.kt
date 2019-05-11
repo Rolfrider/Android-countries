@@ -21,9 +21,25 @@ class CountriesViewModelTest{
         CountryItem("POL", "Poland", "polFlagImageLink"),
         CountryItem("GER", "Germany", "gerFlagImageLink")
     )
+    private val someConnectionError = "Connection Error"
 
     @get:Rule// to solve live data assertions, this runs tasks in test thread
     var rule: TestRule = InstantTaskExecutorRule()
+
+
+    private fun successfulResponse(countries: List<Country>){
+        whenever(countryFetcher.fetchAll(any(), any())).thenAnswer {
+            val onSuccess = it.getArgument<((List<Country>) -> Unit)>(0)
+            onSuccess.invoke(countries)
+        }
+    }
+
+    private fun errorResponse(errorMsg: String){
+        whenever(countryFetcher.fetchAll(any(), any())).thenAnswer {
+            val onError = it.getArgument<((String) -> Unit)>(1)
+            onError.invoke(errorMsg)
+        }
+    }
 
     @Test
     fun `view model returns full list of countries if search query is blank`(){
@@ -61,29 +77,43 @@ class CountriesViewModelTest{
     @Test
     fun `view model updates list of countries on successful response`(){
         val sut = CountriesViewModel(countryFetcher = countryFetcher)
-
-        whenever(countryFetcher.fetchAll(any(), any())).thenAnswer {
-            val onSuccess = it.getArgument<((List<Country>) -> Unit)>(0)
-            onSuccess.invoke(countries)
-        }
+        successfulResponse(countries)
 
         sut.getCountries()
+
         Assert.assertEquals(countryItems, sut.countries().value)
     }
 
     @Test
     fun `view model not updates list of countries on error response`(){
         val sut = CountriesViewModel(countryFetcher = countryFetcher)
-
-        whenever(countryFetcher.fetchAll(any(), any())).thenAnswer {
-            val onSuccess = it.getArgument<((String) -> Unit)>(1)
-            onSuccess.invoke("Some network error")
-        }
+        errorResponse(someConnectionError)
 
         sut.getCountries()
+
         Assert.assertNull(sut.countries().value)
     }
 
+    @Test
+    fun `view model updates error live data with error message on error response`(){
+        val sut = CountriesViewModel(countryFetcher = countryFetcher)
+        errorResponse(someConnectionError)
+
+        sut.getCountries()
+
+        Assert.assertEquals(someConnectionError, sut.error().value)
+    }
+
+
+    @Test
+    fun `view model not updates error live data with error message on successful response`(){
+        val sut = CountriesViewModel(countryFetcher = countryFetcher)
+        successfulResponse(countries)
+
+        sut.getCountries()
+
+        Assert.assertNull(sut.error().value)
+    }
 
     @Test
     fun `view model calls fetchAll method when getting countries`(){

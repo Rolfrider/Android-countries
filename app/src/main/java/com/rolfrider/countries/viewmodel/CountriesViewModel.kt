@@ -13,9 +13,11 @@ class CountriesViewModel(
 ): ViewModel() {
 
     private val countryLiveData = MutableLiveData<List<CountryItem>>()
+    private val errorLiveData = MutableLiveData<String>()
 
 
-    fun countries(): LiveData<List<CountryItem>> = countryLiveData
+    fun countries() = countryLiveData
+    fun error() = errorLiveData
 
     fun getCountries(){
         countryFetcher.fetchAll(
@@ -23,7 +25,9 @@ class CountriesViewModel(
                 allCountries = it.map(::CountryItem)
                 countryLiveData.value = allCountries
             },
-            { println(it)}
+            {
+                errorLiveData.value = it
+            }
         )
     }
 
