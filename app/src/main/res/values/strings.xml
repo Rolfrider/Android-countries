@@ -3,6 +3,7 @@
     <string name="action_search">Search</string>
     <string name="search_hint">Type country name</string>
     <string name="transition_name">image_transition</string>
+    <string name="error_message">Connection problem occurred</string>
     <string name="label_capital">Capital</string>
     <string name="label_region">Region</string>
     <string name="label_population">Population</string>

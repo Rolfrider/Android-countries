@@ -11,9 +11,11 @@ class DetailCountryViewModel(private val countryFetcher: CountryFetcher): ViewMo
 
     private val countryLiveData = MutableLiveData<CountryDetailItem>()
     private val latLngLiveData = MutableLiveData<LatLng>()
+    private val errorLiveData = MutableLiveData<String>()
 
     fun country() = countryLiveData
     fun latLng() = latLngLiveData
+    fun error() = errorLiveData
 
     fun fetchCountry(countryCode: String){
         countryFetcher.fetchCountry(countryCode,
@@ -21,7 +23,9 @@ class DetailCountryViewModel(private val countryFetcher: CountryFetcher): ViewMo
                 countryLiveData.value = CountryDetailItem(it)
                 latLngLiveData.value = parseLatLng(it.latlng)
             },
-            { println(it)}
+            {
+                errorLiveData.value = it
+            }
         )
     }
 

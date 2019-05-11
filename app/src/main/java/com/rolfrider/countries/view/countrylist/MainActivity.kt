@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         countryRecyclerView.adapter = adapter
         viewModel.countries().observe(this, Observer(this::updateCountryList))
+        viewModel.error().observe(this, Observer(this::showErrorMessage))
         viewModel.getCountries()
     }
 
@@ -42,6 +44,12 @@ class MainActivity : AppCompatActivity() {
         if (countries == null ) return
         adapter.updateItemList(countries)
     }
+
+    private fun showErrorMessage(message: String){
+        val toastMessage = getString(R.string.error_message) + " : " + message
+        Toast.makeText(this, toastMessage, Toast.LENGTH_LONG).show()
+    }
+
 
     private fun handleItemClick(item: CountryItem, sharedView: View){
 
