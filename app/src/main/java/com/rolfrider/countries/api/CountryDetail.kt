@@ -1,7 +1,6 @@
 package com.rolfrider.countries.api
 
-import com.google.gson.annotations.JsonAdapter
-import java.util.ArrayList
+import java.util.*
 
 data class CountryDetail(val name: String,
                          val alpha3Code: String,

@@ -1,14 +1,17 @@
 package com.rolfrider.countries.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rolfrider.countries.view.countrylist.CountryItem
-import com.rolfrider.countries.api.CountryFetcher
-import com.rolfrider.countries.api.CountryFetcherImpl
+import com.rolfrider.countries.api.CountryRepository
+import com.rolfrider.countries.api.CountryRepositoryImpl
+import com.rolfrider.countries.api.Result
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CountriesViewModel(
-    private val countryFetcher: CountryFetcher = CountryFetcherImpl(),
+    private val countryRepository: CountryRepository = CountryRepositoryImpl(),
     private var allCountries: List<CountryItem> = emptyList()
 ): ViewModel() {
 
@@ -20,15 +23,12 @@ class CountriesViewModel(
     fun error() = errorLiveData
 
     fun getCountries(){
-        countryFetcher.fetchAll(
-            {
-                allCountries = it.map(::CountryItem)
-                countryLiveData.value = allCountries
-            },
-            {
-                errorLiveData.value = it
+        viewModelScope.launch{
+            when(val result = countryRepository.fetchAll()){
+                is Result.Success -> countryLiveData.value = result.data.map { CountryItem(it) }
+                is Result.Error -> errorLiveData.value = result.exception.message
             }
-        )
+        }
     }
 
     fun searchCountry(query: String?){

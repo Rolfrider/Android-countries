@@ -2,26 +2,26 @@ package com.rolfrider.countries.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rolfrider.countries.api.CountryFetcher
-import com.rolfrider.countries.api.CountryFetcherImpl
+import com.rolfrider.countries.api.CountryRepository
+import com.rolfrider.countries.api.CountryRepositoryImpl
 
 class ViewModelFactory: ViewModelProvider.Factory {
 
 
-    private val countryFetcher: CountryFetcher
+    private val countryRepository: CountryRepository
 
     init {
-        countryFetcher = CountryFetcherImpl()
+        countryRepository = CountryRepositoryImpl()
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(CountriesViewModel::class.java) -> {
-                CountriesViewModel(countryFetcher = countryFetcher) as T
+                CountriesViewModel(countryRepository = countryRepository) as T
             }
             modelClass.isAssignableFrom(DetailCountryViewModel::class.java) -> {
-                DetailCountryViewModel(countryFetcher) as T
+                DetailCountryViewModel(countryRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown view model ${modelClass.name}")
         }
