@@ -9,6 +9,7 @@ import com.rolfrider.countries.api.CountryRepository
 import com.rolfrider.countries.api.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Error
 import java.util.ArrayList
 
@@ -25,7 +26,7 @@ class DetailCountryViewModel(private val countryRepository: CountryRepository): 
     fun fetchCountry(countryCode: String){
         viewModelScope.launch{
 
-            when(val result = countryRepository.fetchCountry(countryCode)){
+            when(val result = withContext(Dispatchers.IO){ countryRepository.fetchCountry(countryCode) }){
                 is Result.Success -> {
                     countryLiveData.value = CountryDetailItem(result.data)
                     latLngLiveData.value = parseLatLng(result.data.latlng)

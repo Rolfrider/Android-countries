@@ -9,6 +9,7 @@ import com.rolfrider.countries.api.CountryRepositoryImpl
 import com.rolfrider.countries.api.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CountriesViewModel(
     private val countryRepository: CountryRepository = CountryRepositoryImpl(),
@@ -24,7 +25,7 @@ class CountriesViewModel(
 
     fun getCountries(){
         viewModelScope.launch{
-            when(val result = countryRepository.fetchAll()){
+            when(val result = withContext(Dispatchers.IO){ countryRepository.fetchAll() }){
                 is Result.Success -> countryLiveData.value = result.data.map { CountryItem(it) }
                 is Result.Error -> errorLiveData.value = result.exception.message
             }
